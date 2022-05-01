@@ -50,7 +50,7 @@ $sanpham = get_item("sanpham", "MaSP", $masp);
                             <input type="text" name="num-order" value="1" id="num-order">
                             <a title="" id="plus"><i class="fa fa-plus"></i></a>
                         </div>
-                        <a href="?mod=cart&id=<?php echo $sanpham['MaSP'] ?>" title="Thêm giỏ hàng" class="add-cart">Thêm giỏ hàng</a>
+                        <a href="?mod=cart&act=add&id=<?php echo $sanpham['MaSP'] ?>" title="Thêm giỏ hàng" class="add-cart">Thêm giỏ hàng</a>
                     </div>
                 </div>
             </div>

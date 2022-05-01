@@ -1,7 +1,7 @@
 <?php
 function get_table($table)
 {
-
+    
     global $conn;
     $sql = "SELECT * FROM {$table}";
     $result = mysqli_query($conn, $sql);
@@ -15,19 +15,20 @@ function get_table($table)
 }
 function get_list_product_by_cat_id($cat_id, $num)
 {
-
+    
     global $conn;
     $sql = "SELECT * FROM sanpham WHERE MaDM = {$cat_id}";
     $result = mysqli_query($conn, $sql);
     $list_sp = array();
-    if ($num == 0) {
+    if($num == 0){
         if (mysqli_num_rows($result)) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $list_sp[] = $row;
             }
         }
-    } else {
-        $sql = $sql . " LIMIT {$num}";
+        
+    }else{
+        $sql = $sql." LIMIT {$num}";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -39,7 +40,7 @@ function get_list_product_by_cat_id($cat_id, $num)
 }
 function get_list_outstanding_product()
 {
-
+    
     global $conn;
     $sql = "SELECT * FROM sanpham LIMIT 6";
     $result = mysqli_query($conn, $sql);
@@ -51,7 +52,7 @@ function get_list_outstanding_product()
     }
     return $list_otd_p;
 }
-function get_item($item, $attr, $value)
+function get_item($item,$attr, $value)
 {
     global $conn;
     $sql = "SELECT * FROM $item WHERE {$attr} = {$value}";
@@ -62,39 +63,38 @@ function get_item($item, $attr, $value)
     return $info;
 }
 
-function filter()
-{
-    $sql = "";
-    if ($_POST['select'] != 0) {
-        switch ($_POST['select']) {
-            case 1:
-                $sql  = "SELECT * FROM sanpham ORDER BY TenSP ASC";
-                break;
-            case 2:
-                $sql  = "SELECT * FROM sanpham ORDER BY TenSP DESC";
-                break;
-            case 3:
-                $sql  = "SELECT * FROM sanpham ORDER BY GiaGoc DESC";
-                break;
-            case 4:
-                $sql  = "SELECT * FROM sanpham ORDER BY GiaGoc ASC";
-                break;
-            default:
-                $sql = "";
+function filter(){
+        $sql="";
+        if($_POST['select'] != 0){
+            switch ($_POST['select']){
+                case 1:
+                    $sql  = "SELECT * FROM sanpham ORDER BY TenSP ASC";
+                    break;
+                case 2:
+                    $sql  = "SELECT * FROM sanpham ORDER BY TenSP DESC";
+                    break;
+                case 3:
+                    $sql  = "SELECT * FROM sanpham ORDER BY GiaGoc DESC";
+                    break;
+                case 4:
+                    $sql  = "SELECT * FROM sanpham ORDER BY GiaGoc ASC";
+                    break;
+                default:
+                    $sql="";
+            }
         }
-    }
-    global $conn;
-    $result = mysqli_query($conn, $sql);
-    $list_sp = array();
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $list_sp[] = $row;
+        global $conn;
+        $result = mysqli_query($conn, $sql);
+        $list_sp = array();
+            if (mysqli_num_rows($result)>0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $list_sp[] = $row;
+                }
+            
         }
-    }
     return $list_sp;
 }
-function get_search()
-{
+function get_search(){
     global $conn;
     $search = $_GET['search'];
     $sql = "SELECT * FROM sanpham where TenSP like '%{$search}%'";
@@ -104,6 +104,20 @@ function get_search()
         while ($row = mysqli_fetch_assoc($result)) {
             $list_sp[] = $row;
         }
-    }
+        }
     return $list_sp;
 }
+function getCart($id_user){
+    global $conn;
+    $sql = "SELECT Id_User, giohang.MaSP, Anh, TenSP, GiaGoc, GiaKhuyenMai, giohang.SoLuong FROM giohang, sanpham WHERE giohang.MaSP = sanpham.MaSP AND Id_User = {$id_user}";
+    $result = mysqli_query($conn, $sql);
+    $Cat = array();
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $Cat[] = $row;
+        }
+        }
+    return $Cat;
+} 
+
+

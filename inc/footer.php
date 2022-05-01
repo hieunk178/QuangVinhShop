@@ -1,38 +1,3 @@
-<!-- BEGIN CHAT -->
-    <!-- Messenger Plugin chat Code -->
-    <div id="fb-root"></div>
-    <style>
-        #fb-customer-chat{
-            width: 200px;
-        }
-    </style>
-    <!-- Your Plugin chat code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
-    <script>
-      var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "105133772140624");
-      chatbox.setAttribute("attribution", "biz_inbox");
-    </script>
-
-     Your SDK code 
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          xfbml            : true,
-          version          : 'v13.0'
-        });
-      };
-
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <!-- END CHAT -->
 <div id="footer-wp">
     <div id="foot-body">
         <div class="wp-inner clearfix">
@@ -64,16 +29,16 @@
                 <h3 class="title">Chính sách mua hàng</h3>
                 <ul class="list-item">
                     <li>
-                        <a href="" title="">Quy định - chính sách</a>
+                        <a href="?mod=page&act=hdmh" title="">Hướng dẫn mua hàng</a>
                     </li>
                     <li>
-                        <a href="" title="">Chính sách bảo hành - đổi trả</a>
+                        <a href="?mod=page&act=csbh" title="">Chính sách bảo hành - đổi trả</a>
                     </li>
                     <li>
-                        <a href="" title="">Chính sách hội viện</a>
+                        <a href="?mod=page&act=cshv" title="">Chính sách hội viện</a>
                     </li>
                     <li>
-                        <a href="" title="">Giao hàng - lắp đặt</a>
+                        <a href="?mod=page&act=gh" title="">Giao hàng - lắp đặt</a>
                     </li>
                 </ul>
             </div>

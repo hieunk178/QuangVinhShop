@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST['search'])){
-    $sql = "SELECT tensp FROM sanpham where tensp like '%{$_POST['search']}%'";
-}else $sql = "SELECT tensp FROM sanpham";
+    $sql = "SELECT masp, tensp FROM sanpham where tensp like '%{$_POST['search']}%'";
+}else $sql = "SELECT masp, tensp FROM sanpham";
 $result = mysqli_query($conn, $sql);
 $list = array();
 if (mysqli_num_rows($result) > 0) {
@@ -10,5 +10,5 @@ if (mysqli_num_rows($result) > 0) {
     }
 }
 foreach($list as $item){
-    echo "<li><a>{$item['tensp']}</a></li>";
+    echo "<li class='product-title'>{$item['tensp']} <span>{$item['masp']}</span></li>";
 }

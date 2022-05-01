@@ -78,13 +78,13 @@ p{
     overflow: hidden;
     margin-bottom: 2px;
 }
-#selling-wp .section-detail .list-item .info .price .new{
+.price .new{
     display: inline-block;
     font-family: 'Roboto Medium';
     color: #f12a43;
     margin-right: 5px;
 }
-#selling-wp .section-detail .list-item .info .price .old{
+.price .old{
     font-family: 'Roboto Light';
     color: #999;
     text-decoration: line-through;
@@ -167,7 +167,6 @@ p{
     text-overflow: ellipsis;
     word-break: break-word;
     min-height: 36px;
-
 }
 #feature-product-wp .list-item li .price, #list-product-wp .list-item li .price, #same-category-wp .list-item li .price{ text-align: center; margin-bottom: 15px;}
 #feature-product-wp .list-item li .price .new, #list-product-wp .list-item li .price .new, #same-category-wp .list-item li .price .new{

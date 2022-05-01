@@ -160,7 +160,6 @@ $(document).ready(function () {
             }
         });
     });
-
     $(".select-product.right i").click(function() {
 
         $.ajax({
@@ -188,7 +187,45 @@ $(document).ready(function () {
             }
         });
     });
-    
+    //show product compare
+    $('.select1 .content').on('click', '.product-title', function() {
+        $(".select.select1").slideToggle(200);
+        var chose = "";
+        $.each($(this).find("span"), function () {
+           chose =  Number($(this).text());
+        });
+        $(".select-product.left .lable").html($(this).html());
+        $.ajax({
+            url: "?mod=compare&act=show_por_comp",
+            method: 'POST',
+            data: {
+                id_pro: chose
+            },
+            dataType: "text",
+            success: function(result) {
+                $(".compare .product-left").html(result);
+            }
+        });
+    });
+    $('.select2 .content').on('click', '.product-title', function() {
+        $(".select.select2").slideToggle(200);
+        var chose = "";
+        $.each($(this).find("span"), function () {
+           chose =  Number($(this).text());
+        });
+        $(".select-product.right .lable").html($(this).html());
+        $.ajax({
+            url: "?mod=compare&act=show_por_comp",
+            method: 'POST',
+            data: {
+                id_pro: chose
+            },
+            dataType: "text",
+            success: function(result) {
+                $(".compare .product-right").html(result);
+            }
+        });
+    });
 });
 
 function tab() {

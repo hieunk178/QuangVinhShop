@@ -14,7 +14,9 @@ $result = mysqli_query($conn, $sql);
     }else echo "Tên đăng nhập không tồn tại hoặc mật khẩu không đúng";
     if(isset($user)){
         $_SESSION['is_login'] = true;
+        $_SESSION['id_user'] = $user['Id_User'];
         $_SESSION['is_fullname'] = $user['HoVaTen'];
+        $_SESSION['permission'] = $user['Quyen'];
         redirect();
     }
 }
@@ -34,7 +36,7 @@ $result = mysqli_query($conn, $sql);
     <section>
      <!--Bắt Đầu Phần Nội Dung-->
      <div class="noi-dung">
-         <div class="form login">
+         <div class="form">
              <h2>Trang Đăng Nhập</h2>
              <form action="" method="POST">
                  <div class="input-form">

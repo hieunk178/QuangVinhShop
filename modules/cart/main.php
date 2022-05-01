@@ -1,5 +1,10 @@
 <?php
 require "inc/header.php";
+if(empty($_SESSION['id_user'])){
+    redirect("?mod=account&act=login");
+}else{
+    $Cat = getCart($_SESSION['id_user']);
+}
 ?>
 
 <div id="main-content-wp" class="cart-page">
@@ -32,44 +37,30 @@ require "inc/header.php";
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                        foreach($Cat as $item){
+                        isset($item['GiaKhuyenMai'])? $price = $item['GiaKhuyenMai'] : $price = $item['GiaGoc'];    
+                        ?>
                         <tr>
-                            <td>HCA00031</td>
+                            <td> <?php echo $item['MaSP']?> </td>
                             <td>
                                 <a href="" title="" class="thumb">
-                                    <img src="public/images/img-pro-11.png" alt="">
+                                    <img src="<?php echo $item['Anh'] ?>" alt="">
                                 </a>
                             </td>
                             <td>
-                                <a href="" title="" class="name-product">Sony Express X6</a>
+                                <a href="" title="" class="name-product"><?php echo $item['TenSP'] ?></a>
                             </td>
-                            <td>500.000đ</td>
+                            <td><?php echo currency_format($price) ?></td>
                             <td>
-                                <input type="text" name="num-order" value="1" class="num-order">
+                                <input type="number" name="num-order" min=1 max =10 value="<?php echo $item['SoLuong'] ?>" class="num-order">
                             </td>
-                            <td>500.000đ</td>
+                            <td><?php echo currency_format($price * $item['SoLuong']); ?></td>
                             <td>
-                                <a href="" title="" class="del-product"><i class="fa fa-trash-o"></i></a>
+                                <a href="?mod=cart&act=delete&id=<?php echo $item['MaSP']?>" title="" class="del-product"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>HCA00032</td>
-                            <td>
-                                <a href="" title="" class="thumb">
-                                    <img src="public/images/img-pro-23.png" alt="">
-                                </a>
-                            </td>
-                            <td>
-                                <a href="" title="" class="name-product">Laptop Probook HP 4430s</a>
-                            </td>
-                            <td>350.000đ</td>
-                            <td>
-                                <input type="text" name="num-order" value="1" class="num-order">
-                            </td>
-                            <td>350.000đ</td>
-                            <td>
-                                <a href="" title="" class="del-product"><i class="fa fa-trash-o"></i></a>
-                            </td>
-                        </tr>
+                        <?php } ?>
                     </tbody>
                     <tfoot>
                         <tr>
@@ -96,8 +87,8 @@ require "inc/header.php";
         <div class="section" id="action-cart-wp">
             <div class="section-detail">
                 <p class="title">Click vào <span>“Cập nhật giỏ hàng”</span> để cập nhật số lượng. Nhập vào số lượng <span>0</span> để xóa sản phẩm khỏi giỏ hàng. Nhấn vào thanh toán để hoàn tất mua hàng.</p>
-                <a href="?page=home" title="" id="buy-more">Mua tiếp</a><br/>
-                <a href="" title="" id="delete-cart">Xóa giỏ hàng</a>
+                <a href="?mod=home" title="" id="buy-more">Mua tiếp</a><br/>
+                <a href="?mod=cart&act=delete&id_user=<?php echo $_SESSION['id_user'] ?>" title="" id="delete-cart">Xóa giỏ hàng</a>
             </div>
         </div>
     </div>

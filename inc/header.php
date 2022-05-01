@@ -17,6 +17,7 @@ if(isset($_POST['btn-search'])){
         <link href="public/css/carousel/owl.theme.css" rel="stylesheet" type="text/css"/>
         <link href="public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="public/style.css" rel="stylesheet" type="text/css"/>
+        <link href="public/account.css" rel="stylesheet" type="text/css"/>
         <link href="public/responsive.css" rel="stylesheet" type="text/css"/>
         
         
@@ -44,13 +45,14 @@ if(isset($_POST['btn-search'])){
                                     <div class='top-content'>
                                     <a>Xin chào {$_SESSION['is_fullname']}</a>
                                     <ul>
-                                        <li><a>Thông tin tải khoản</a></li>
-                                        <li> <a href='./admin'>Quản lý cửa hàng</a></li>
-                                        <li><a href='?mod=account&act=logout'>Đăng xuất</a></li>
+                                        <li><a href='?mod=account&act=detail'>Thông tin tải khoản</a></li>";
+                                    if(isset($_SESSION['permission']) & $_SESSION['permission'] ==0)
+                                        echo "<li> <a href='./admin'>Quản lý cửa hàng</a></li>";
+                                    
+                                    echo "<li><a href='?mod=account&act=logout'>Đăng xuất</a></li>
                                     </ul>
                                     </div>";
                                 }else{
-                                    redirect("?mod=account&act=login");
                                     echo "<a href='?mod=account&act=login'>Đăng nhập</a>";
                                 }
                                 ?>    
@@ -92,7 +94,6 @@ if(isset($_POST['btn-search'])){
                                                     <a href="" title="" class="product-name">Sony Express X6</a>
                                                     <p class="price">6.250.000đ</p>
                                                     <p class="qty">Số lượng: <span>1</span></p>
-                                                    <input type="text" pla>
                                                 </div>
                                             </li>
                                             <li class="clearfix">
@@ -110,10 +111,10 @@ if(isset($_POST['btn-search'])){
                                             <p class="title fl-left">Tổng:</p>
                                             <p class="price fl-right">18.500.000đ</p>
                                         </div>
-                                        <dic class="action-cart clearfix">
-                                            <a href="?page=cart" title="Giỏ hàng" class="view-cart fl-left">Giỏ hàng</a>
-                                            <a href="?page=checkout" title="Thanh toán" class="checkout fl-right">Thanh toán</a>
-                                        </dic>
+                                        <div class="action-cart clearfix">
+                                            <a href="?mod=cart" title="Giỏ hàng" class="view-cart fl-left">Giỏ hàng</a>
+                                            <a href="?mod=checkout" title="Thanh toán" class="checkout fl-right">Thanh toán</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
