@@ -107,17 +107,4 @@ function get_search(){
         }
     return $list_sp;
 }
-function getCart($id_user){
-    global $conn;
-    $sql = "SELECT Id_User, giohang.MaSP, Anh, TenSP, GiaGoc, GiaKhuyenMai, giohang.SoLuong FROM giohang, sanpham WHERE giohang.MaSP = sanpham.MaSP AND Id_User = {$id_user}";
-    $result = mysqli_query($conn, $sql);
-    $Cat = array();
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $Cat[] = $row;
-        }
-        }
-    return $Cat;
-} 
-
 

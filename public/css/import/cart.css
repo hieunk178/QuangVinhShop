@@ -36,6 +36,9 @@
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+#info-cart-wp .price span{
+    display: none;
+}
 #info-cart-wp table tbody tr td .thumb{
     display: inline-block;
     width: 100px;
@@ -45,7 +48,7 @@
 }
 #checkout-cart{
     display: inline-block;
-    padding: 12px 25px;
+    padding: 12px 60px;
     text-transform: uppercase;
     font-size: 13px;
     border-radius: 3px;

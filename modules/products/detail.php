@@ -58,7 +58,7 @@ $sanpham = get_item("sanpham", "MaSP", $masp);
                 <div class="section-head">
                     <h3 class="section-title">Mô tả sản phẩm</h3>
                 </div>
-                <div class="section-detail">
+                <div class="section-detail detail_description">
                     <?php echo $sanpham['MoTaChiTiet']?>
                 </div>
             </div>

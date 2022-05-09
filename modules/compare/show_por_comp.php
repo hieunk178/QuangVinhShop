@@ -12,7 +12,9 @@ foreach($list_mota as $mt){
     $mota = $mota."<p>{$mt}</p>";
 }
 $parameter = explode('<table', $item['motachitiet']);
-$parameter = '<table cellpadding="0" cellspacing="0"'.$parameter[1];
+if(isset($parameter[1])){
+$parameter = '<table'.$parameter[1];
+}else $parameter = "";
 echo "<a href='?mod=products&act=detail&id=1' title='' class='thumb'>
     <img src='{$item['anh']}'>
 </a>

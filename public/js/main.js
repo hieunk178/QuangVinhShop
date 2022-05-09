@@ -226,6 +226,32 @@ $(document).ready(function () {
             }
         });
     });
+    //CART
+    $("#info-cart-wp").on('change','.num-order',function(){
+        var num_order = Number($(this).val());
+        var total = Number($(".table #total-price").attr('data-total'));
+        var id = $(this).attr('data-id');
+        console.log(id);
+        $.ajax({
+            url: "?mod=cart&act=num_change",
+            method: 'POST',
+            data: {
+                num_order: num_order,
+                id: id,
+                total: total
+            },
+            dataType: "json",
+            success: function(result) {
+                $("#info-cart-wp .subtotal"+id).text(result.subtotal);
+                $("#info-cart-wp #total-price span").text(result.total_format);
+                $(".table #total-price").attr('data-total',result.total);
+            },
+            error:function(xhr, ajaxOptions, throwError){
+                //alert(xhr.status);
+                alert(throwError);
+            }
+        });
+    });
 });
 
 function tab() {

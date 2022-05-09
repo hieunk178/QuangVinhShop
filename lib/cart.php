@@ -1,69 +1,50 @@
 <?php
-    function add_cart($id){
-        global $list_product;
-        $item = get_product_by_id($id - 1);
-        //Them thông tin vào giỏ hàng
-        $qty = 1;
-        if(isset($_SESSION['cart']) && array_key_exists($id, $_SESSION['cart']['buy'])){
-            $qty = $_SESSION['cart']['buy'][$id]['qty'] + 1;
-        }
-        $_SESSION['cart']['buy'][$id] = array(
-            'id' => $item["id"],
-            'url' => $item['url'],
-            'product_name' => $item['product_name'],
-            "price" => $item['price'],
-            'product_thumb' => $item['product_thumb'],
-            'code' => $item['code'],
-            'qty' => $qty,
-            'sub_total' => $qty * $item['price']
-        );
-        //Cập nhật thông tin cart
-        update_info_cart();
+    function getPrice($item){
+        return $item['GiaKhuyenMai']>0 ? $item['GiaKhuyenMai']: $item['GiaGoc']; 
     }
-
-    function update_info_cart(){
-        if(isset($_SESSION['cart'])){
-            $num_total = 0;
-            $Total = 0;
-            foreach($_SESSION['cart']['buy'] as $item){
-                $num_total += $item['qty'];
-                $Total += $item['sub_total'];
-            }
-            $_SESSION['cart']['info'] = array(
-                'num_total' => $num_total,
-                'total' => $Total
-            );
-        }
+    function update_num_order($sl, $ma){
+        global $conn;
+        $sql = "UPDATE giohang SET soluong = $sl where masp = $ma AND id_user = {$_SESSION['id_user']}";
+        mysqli_query($conn, $sql);
     }
-    function get_list_by_cart(){
-        if(isset($_SESSION['cart'])){
-            foreach($_SESSION['cart']['buy'] as &$item){
-                $item['url_del_cart'] = "?mod=cart&act=delete_item&id={$item['id']}";
+    function get_cart_by_id_user($id)
+    {
+        global $conn;
+        $sql = "SELECT giohang.soluong, giagoc, giakhuyenmai FROM giohang, sanpham WHERE giohang.masp = sanpham.masp and id_user = {$_SESSION['id_user']}";
+        $result = mysqli_query($conn, $sql);
+        $cart = array();
+        if (mysqli_num_rows($result)>0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $cart[] = $row;
             }
-            return $_SESSION['cart']['buy'];
-        }return false;
+        }
+        return $cart;
     }
     function get_total_cart(){
-        if(isset($_SESSION['cart']['info']['total']) && $_SESSION['cart']['info']['total'] > 0){
-            return currency_format($_SESSION['cart']['info']['total']);
-        }else echo "0đ";
+        $cart = get_cart_by_id_user($_SESSION['id_user']);
+        $total = 0;
+        foreach($cart as $item){
+            $item['giakhuyenmai']>0? $price = $item['giakhuyenmai'] : $price = $item['giagoc'];
+            $total += $item['soluong'] * $price;
+        }
+        return $total;
     }
-    function delete_cart($id){
-        if(!empty($id)){
-            if(isset($_SESSION['cart']['buy'][$id])){
-                unset($_SESSION['cart']['buy'][$id]);
+    function getCart($id_user){
+        global $conn;
+        $sql = "SELECT Id_User, giohang.MaSP, Anh, TenSP, GiaGoc, GiaKhuyenMai, giohang.SoLuong FROM giohang, sanpham WHERE giohang.MaSP = sanpham.MaSP AND Id_User = {$id_user}";
+        $result = mysqli_query($conn, $sql);
+        $Cat = array();
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $Cat[] = $row;
             }
-            update_info_cart();
-        }else{
-            unset($_SESSION['cart']);
-            update_info_cart();
-        }
+            }
+        return $Cat;
     }
-    function update_cart($qty){
-        foreach($qty as $id=>$new_qty){
-            $_SESSION['cart']['buy'][$id]['qty']  = $new_qty;
-            $_SESSION['cart']['buy'][$id]['sub_total']  = $new_qty * $_SESSION['cart']['buy'][$id]['price'];
-            update_info_cart();
-        }
+    function get_num_pro_in_cart(){
+        global $conn;
+        $sql = "SELECT soluong FROM giohang WHERE id_user = {$_SESSION['id_user']}";
+        $result = mysqli_query($conn, $sql);
+        return mysqli_num_rows($result);
     }
 ?>

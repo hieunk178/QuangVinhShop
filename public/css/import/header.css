@@ -259,6 +259,13 @@
   display: block;
   font-size: 13px;
   color: #333;
+  line-height: normal;
+  display:-webkit-box;
+  -webkit-line-clamp:1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 #cart-wp #dropdown .list-cart .info .price {
   display: block;

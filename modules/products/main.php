@@ -84,7 +84,7 @@ if(isset($_POST['btn-filter'])){
                                 <span class="old"><?php echo currency_format($item['GiaGoc']) ?></span>
                             </div>
                             <div class="action clearfix">
-                                <a href="?mod=cart&id=<?php echo $item['MaSP'] ?>" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
+                                <a href="?mod=cart&act=add&id=<?php echo $item['MaSP'] ?>" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
                                 <a href="?mod=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
                             </div>
                         </li>

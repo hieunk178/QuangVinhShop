@@ -4,6 +4,7 @@ require "db/connect.php";
 require "lib/money.php";
 require "lib/getDatabase.php";
 require "lib/url.php";
+require "lib/cart.php";
 
 $mod = isset($_GET['mod']) ? $_GET['mod'] : 'home';
 $act = isset($_GET['act']) ? $_GET['act'] : 'main';

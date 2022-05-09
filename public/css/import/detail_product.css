@@ -114,3 +114,7 @@
 #post-product-wp .section-detail td{
     padding: 10px;
 }
+.detail_description img{
+    width: 100%;
+    margin: 0 auto;
+}
