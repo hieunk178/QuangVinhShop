@@ -37,96 +37,35 @@
                                     <td><span class="thead-text">Số điện thoại</span></td>
                                     <td><span class="thead-text">Email</span></td>
                                     <td><span class="thead-text">Địa chỉ</span></td>
-                                    <td><span class="thead-text">Đơn hàng</span></td>
-                                    <td><span class="thead-text">Thời gian</span></td>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                $custommer = get_table("taikhoan");
+                                $count = 0;
+                                foreach($custommer as $item){
+                                    $count++;
+                                ?>
                                 <tr>
                                     <td><input type="checkbox" name="checkItem" class="checkItem"></td>
-                                    <td><span class="tbody-text">1</h3></span>
+                                    <td><span class="tbody-text"><?php echo $count ?></h3></span>
                                     <td>
                                         <div class="tb-title fl-left">
-                                            <a href="" title="">Phan Văn Cương</a>
+                                            <a href="" title=""><?php echo $item['HoVaTen'] ?></a>
                                         </div>
                                         <ul class="list-operation fl-right">
                                             <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
                                             <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </td>
-                                    <td><span class="tbody-text">0987654321</span></td>
-                                    <td><span class="tbody-text">phancuong.qt@gmail.com</span></td>
-                                    <td><span class="tbody-text">Nam Từ Liêm -  Hà Nội</span></td>
-                                    <td><span class="tbody-text">1</span></td>
-                                    <td><span class="tbody-text">12-07-2016</span></td>
+                                    <td><span class="tbody-text"><?php echo $item['SDT'] ?></span></td>
+                                    <td><span class="tbody-text"><?php echo $item['Email'] ?></span></td>
+                                    <td><span class="tbody-text"><?php echo $item['DiaChi'] ?></span></td>
                                 </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="checkItem" class="checkItem"></td>
-                                    <td><span class="tbody-text">1</h3></span>
-                                    <td>
-                                        <div class="tb-title fl-left">
-                                            <a href="" title="">Phan Văn Cương</a>
-                                        </div>
-                                        <ul class="list-operation fl-right">
-                                            <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </td>
-                                    <td><span class="tbody-text">0987654321</span></td>
-                                    <td><span class="tbody-text">phancuong.qt@gmail.com</span></td>
-                                    <td><span class="tbody-text">Nam Từ Liêm -  Hà Nội</span></td>
-                                    <td><span class="tbody-text">1</span></td>
-                                    <td><span class="tbody-text">12-07-2016</span></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="checkItem" class="checkItem"></td>
-                                    <td><span class="tbody-text">1</h3></span>
-                                    <td>
-                                        <div class="tb-title fl-left">
-                                            <a href="" title="">Phan Văn Cương</a>
-                                        </div>
-                                        <ul class="list-operation fl-right">
-                                            <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </td>
-                                    <td><span class="tbody-text">0987654321</span></td>
-                                    <td><span class="tbody-text">phancuong.qt@gmail.com</span></td>
-                                    <td><span class="tbody-text">Nam Từ Liêm -  Hà Nội</span></td>
-                                    <td><span class="tbody-text">1</span></td>
-                                    <td><span class="tbody-text">12-07-2016</span></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="checkItem" class="checkItem"></td>
-                                    <td><span class="tbody-text">1</h3></span>
-                                    <td>
-                                        <div class="tb-title fl-left">
-                                            <a href="" title="">Phan Văn Cương</a>
-                                        </div>
-                                        <ul class="list-operation fl-right">
-                                            <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </td>
-                                    <td><span class="tbody-text">0987654321</span></td>
-                                    <td><span class="tbody-text">phancuong.qt@gmail.com</span></td>
-                                    <td><span class="tbody-text">Nam Từ Liêm -  Hà Nội</span></td>
-                                    <td><span class="tbody-text">1</span></td>
-                                    <td><span class="tbody-text">12-07-2016</span></td>
-                                </tr>
+                                <?php
+                                }
+                                ?>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td><input type="checkbox" name="checkAll" id="checkAll"></td>
-                                    <td><span class="tfoot-body">STT</span></td>
-                                    <td><span class="tfoot-body">Họ và tên</span></td>
-                                    <td><span class="tfoot-body">Số điện thoại</span></td>
-                                    <td><span class="tfoot-body">Email</span></td>
-                                    <td><span class="tfoot-body">Địa chỉ</span></td>
-                                    <td><span class="tfoot-body">Đơn hàng</span></td>
-                                    <td><span class="tfoot-body">Thời gian</span></td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>

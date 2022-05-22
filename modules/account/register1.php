@@ -1,90 +1,29 @@
 <?php
 require "db/connect.php";
 require "lib/address.php";
-
-$usernameErr = $emailErr = $phoneErr = $fullnameErr = $addressErr = $genderErr = $passwordErr ="";
-
-
 if (isset($_POST['btn-register'])) {
     $username = $_POST['username'];
-    $password = md5($_POST['password']);
-    $re_password = md5($_POST['re_password']);
+    $password = MD5($_POST['password']);
+    $re_password = MD5($_POST['re_password']);
     $fullname = $_POST['fullname'];
     $phone = $_POST['phone'];
-    $email = $_POST['email'];
     $province = $_POST['province'];
     $district = $_POST['district'];
-    $gender = $_POST['gender'];
     $ward = $_POST['ward'];
-    $ckpassword = $_POST['password'];
+    $address = $_POST['address'];
     $error = array();
-    $address = $_POST['address'].", ".get_address($ward, $district, $province);
-
     if ($password != $re_password) {
-        $error["password"] = "Confirmation password does not match";
-        $password = MD5($password);
+        $error[] = "Mật khẩu xác nhận không trùng khớp";
     } else $success = true;
-
-    if (empty($_POST["username"])) {
-        $usernameErr = "Name is required";
-     } else {
-    // check if name only contains letters and whitespace
-    if (!preg_match("/^[a-zA-Z0-9]*$/",$username)) {
-      $usernameErr = "Only letters, white space allowed and number";
-        }
-    }
-
-    if (empty($_POST["email"])) {
-        $emailErr = "Email is required";
-     } else {
-    // check if e-mail address is well-formed
-    if (!preg_match("/^[A-Za-z0-9_.]{6,32}@([a-zA-Z0-9]{2,12})(.[a-zA-Z]{2,12})+$/",$email)) {
-      $emailErr = "Invalid email format";
-    }
-    }
-
-    if (empty($_POST["phone"])) {
-        $phoneErr = "Phone is required";
-     } else {
-    // check if phone only number
-    if (!preg_match("/^[0-9 ]*$/",$phone)) {
-      $phoneErr = "Only number";
-        }
-    }
-
-    if (empty($_POST["password"])) {
-        $passwordErr = "Password is required";
-     } else {
-    if (strlen($ckpassword) < 6) {
-       $passwordErr = "Have at least 6 characters";
-        }
-    }
-
-    if (empty($_POST["fullname"])) {
-        $fullnameErr = "Fullname is required";
-     }
-
-     if (empty($_POST["gender"])) {
-         $genderErr = "Gender is required";
-     }
-
-     if (empty($_POST["address"])) {
-        $addressErr = "Address is required";
-     }
-
-    if (!empty($success) && empty($usernameErr) && empty($emailErr) && empty($phoneErr) && empty($fullnameErr) && empty($genderErr) && empty($addressErr) && empty($passwordErr) ) {
-        $value = "'{$username}', '{$password}', '{$fullname}', '{$phone}', '{$email}' , '{$address}', '{$gender}'" ;
-        $sql = "INSERT INTO taikhoan(TenDangNhap, MatKhau, HoVaTen, SDT, Email, DiaChi, GioiTinh) values ($value)";
-        
+    if (!empty($success)) {
+        $value = "'{$username}', '{$password}', '{$fullname}', '{$phone}', '{$province}', '{$district}', '{$ward}', '{$address}'";
+        $sql = "INSERT INTO taikhoan(TenDangNhap, MatKhau, HoVaTen, SDT, id_province, id_district, id_ward, DiaChi) value ($value)";
+        echo $sql;
         if(mysqli_query($conn,$sql)){
-            header("Location: ?mod=account&act=login");
-        } 
+        header("Location: ?mod=account&act=login");
+        }
     }
-    
-
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +43,6 @@ if (isset($_POST['btn-register'])) {
 </head>
 
 <body>
-
     <script>
         $(function() {
             $("#province").change(function() {
@@ -150,12 +88,10 @@ if (isset($_POST['btn-register'])) {
                     <div class="input-form">
                         <span>Tên Đăng Nhập</span><span class="obligatory">*</span>
                         <input type="text" name="username">
-                        <span class="error"><?php echo $usernameErr;?></span>
                     </div>
                     <div class="input-form">
                         <span>Mật Khẩu</span><span class="obligatory">*</span>
                         <input type="password" name="password">
-                        <span class="error"><?php echo $passwordErr;?></span>
                     </div>
                     <div class="input-form">
                         <span>Nhập lại mật khẩu</span><span class="obligatory">*</span>
@@ -164,26 +100,11 @@ if (isset($_POST['btn-register'])) {
                     <div class="input-form">
                         <span>Họ và tên</span><span class="obligatory">*</span>
                         <input type="text" name="fullname">
-                        <span class="error"><?php echo $fullnameErr;?></span>
-                    </div>
-                    <div>
-                        <span>Giới tính</span><span class="obligatory">*</span><br><br>
-                        <input type="radio" name="gender" value="Nam">Nam &emsp;
-                        <input type="radio" name="gender" value="Nữ">Nữ &emsp;
-                        <input type="radio" name="gender" value="Khác">Khác
-                        <span class="error"> <?php echo $genderErr;?></span><br><br>
                     </div>
                     <div class="input-form">
                         <span>Số điện thoại</span><span class="obligatory">*</span>
                         <input type="text" name="phone">
-                        <span class="error"><?php echo $phoneErr;?></span>
                     </div>
-                    <div class="input-form">
-                        <span>Email</span><span class="obligatory">*</span>
-                        <input type="text" name="email">
-                        <span class="error"><?php echo $emailErr;?></span>
-                    </div>
-                    
                     <div class="input-form">
                         <span>Tỉnh/ Thành Phố</span><br>
                         <select name="province" required="" id="province">
@@ -208,11 +129,9 @@ if (isset($_POST['btn-register'])) {
                             <option value="">Phường / Xã</option>
                         </select>
                     </div>
-                    
                     <div class="input-form">
                         <span>Địa chỉ</span><span class="obligatory">*</span>
                         <input type="text" name="address">
-                        <span class="error"><?php echo $addressErr;?></span>
                     </div>
                     <div class="input-form">
                         <input type="submit" value="Đăng Ký" name="btn-register">

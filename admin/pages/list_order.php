@@ -1,3 +1,6 @@
+<?php
+$list_order = get_list_order();
+?>
 <div id="main-content-wp" class="list-product-page">
     <div class="wrap clearfix">
         <?php require 'inc/sidebar.php'; ?>
@@ -11,9 +14,8 @@
                 <div class="section-detail">
                     <div class="filter-wp clearfix">
                         <ul class="post-status fl-left">
-                            <li class="all"><a href="">Tất cả <span class="count">(69)</span></a> |</li>
-                            <li class="publish"><a href="">Đã đăng <span class="count">(51)</span></a> |</li>
-                            <li class="pending"><a href="">Chờ xét duyệt<span class="count">(0)</span> |</a></li>
+                            <li class="all"><a href="">Tất cả <span class="count">(<?php echo count($list_order) ?>)</span></a> |</li>
+                            <li class="pending"><a href="">Chờ xét duyệt<span class="count">(1)</span> |</a></li>
                             <li class="pending"><a href="">Thùng rác<span class="count">(0)</span></a></li>
                         </ul>
                         <form method="GET" class="form-s fl-right">
@@ -40,7 +42,6 @@
                                     <td><span class="thead-text">STT</span></td>
                                     <td><span class="thead-text">Mã đơn hàng</span></td>
                                     <td><span class="thead-text">Họ và tên</span></td>
-                                    <td><span class="thead-text">Số sản phẩm</span></td>
                                     <td><span class="thead-text">Tổng giá</span></td>
                                     <td><span class="thead-text">Trạng thái</span></td>
                                     <td><span class="thead-text">Thời gian</span></td>
@@ -48,25 +49,30 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php 
+                                $count = 0;
+                                foreach($list_order as $order){
+                                    $count++;
+                                ?>
                                 <tr>
                                     <td><input type="checkbox" name="checkItem" class="checkItem"></td>
-                                    <td><span class="tbody-text">1</h3></span>
-                                    <td><span class="tbody-text">WEB00001</h3></span>
+                                    <td><span class="tbody-text"><?php echo $count ?></h3></span>
+                                    <td><span class="tbody-text"><?php echo $order['madh']  ?></h3></span>
                                     <td>
                                         <div class="tb-title fl-left">
-                                            <a href="" title="">Phan Văn Cương</a>
+                                            <a href="" title=""><?php echo $order['hovaten']  ?></a>
                                         </div>
                                         <ul class="list-operation fl-right">
                                             <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
                                             <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </td>
-                                    <td><span class="tbody-text">5</span></td>
-                                    <td><span class="tbody-text">1.500.000 VNĐ</span></td>
-                                    <td><span class="tbody-text">Hoạt động</span></td>
-                                    <td><span class="tbody-text">12-07-2016</span></td>
+                                    <td><span class="tbody-text"><?php echo currency_format( $order['tongtien'])  ?></span></td>
+                                    <td><span class="tbody-text"><?php echo $order['tinhtrang']  ?></span></td>
+                                    <td><span class="tbody-text"><?php echo $order['ngaylap']  ?></span></td>
                                     <td><a href="?page=detail_order" title="" class="tbody-text">Chi tiết</a></td>
                                 </tr>
+                                <?php } ?>
                             </tbody>
                             <tfoot>
                                 <tr>

@@ -108,3 +108,22 @@ function get_search(){
     return $list_sp;
 }
 
+function get_list_order(){
+    global $conn;
+    $sql = "SELECT madh, hovaten, tongtien, ngaylap, tinhtrang FROM donhang, taikhoan where donhang.id_user = taikhoan.id_user";
+    $result = mysqli_query($conn, $sql);
+    $list = array();
+    if(mysqli_num_rows($result)>0){
+        while($row = mysqli_fetch_assoc($result)){
+            $list[] = $row;
+        }
+    }
+    return $list;
+}
+function get_address($ward, $district, $province){
+    global $conn;
+    $sql = "SELECT ward._name as 'ward',district._name as 'district', province._name as 'province' FROM ward, district, province WHERE ward._district_id = district.id AND ward._province_id = province.id AND  ward.id=$ward AND ward._district_id= $district AND ward._province_id = $province";
+    $result = mysqli_query($conn, $sql);
+    $ad = mysqli_fetch_assoc($result);
+    return $ad['ward'].", ".$ad['district'].", ".$ad['province'];
+}

@@ -30,6 +30,18 @@
     #main-menu-respon li.open > .sub-menu{ display: block;}
     #cart-wp{ display: none;}
     #cart-respon-wp{ display: block;}
+    /* slider */
+    #category-product-wp{
+        display: none;
+    }
+    #slider-wp .section-detail{
+        width: 100%;
+        margin: 0;
+    }
+
+    #slider-wp .section-detail img{
+        width: 100%;
+    }
     /*MAIN CONTENT*/
     .sidebar{ display: none;}
     .main-content{ width: 100%; float: none; margin-left: 0;}
@@ -60,6 +72,7 @@
     /*DETAIL PRODUCT*/
     #detail-product-wp .info{ padding-left: 25px;}
     #detail-product-wp .info .product-name{ line-height: normal;}
+    #list-product-wp .list-item li .price .old {display: none !important;}
     /*FOOTER*/
     #footer-wp #foot-body .block{ width: 50%; height: 200px;}
     .policy{ padding-left: 0!important;}

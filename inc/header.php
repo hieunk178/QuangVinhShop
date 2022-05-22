@@ -28,6 +28,7 @@ if(isset($_POST['btn-search'])){
         <script src="public/js/main.js" type="text/javascript"></script>
     </head>
     <body>
+        <!--  -->
         <div id="site">
             <div id="container">
                 <div id="header-wp">

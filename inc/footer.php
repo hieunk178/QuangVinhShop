@@ -17,11 +17,11 @@
                         <p>106 - Trần Bình - Cầu Giấy - Hà Nội</p>
                     </li>
                     <li>
-                        <p><a href="tel:0987654321">0987.654.321</a></p>
+                        <p><a href="tel:0987654321">0911.634.683</a></p>
                         <p><a href="tel:0989989989">0989.989.989</a></p>
                     </li>
                     <li>
-                        <p>vshop@gmail.com</p>
+                        <p>quangvinhshop@gmail.com</p>
                     </li>
                 </ul>
             </div>
@@ -56,55 +56,25 @@
     </div>
     <div id="foot-bot">
         <div class="wp-inner">
-            <p id="copyright">© Bản quyền thuộc về Quang Vinh Store</p>
+            <p id="copyright">2022 © Bản quyền thuộc về Quang Vinh Shop</p>
         </div>
     </div>
 </div>
 </div>
 <div id="menu-respon">
-    <a href="?page=home" title="" class="logo">VSHOP</a>
+    <a href="?page=home" title="" class="logo">QuangVinhShop</a>
     <div id="menu-respon-wp">
         <ul class="" id="main-menu-respon">
-            <li>
-                <a href="?page=home" title>Trang chủ</a>
-            </li>
-            <li>
-                <a href="?page=category_product" title>Điện thoại</a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="?page=category_product" title="">Iphone</a>
-                    </li>
-                    <li>
-                        <a href="?page=category_product" title="">Samsung</a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="?page=category_product" title="">Iphone X</a>
-                            </li>
-                            <li>
-                                <a href="?page=category_product" title="">Iphone 8</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="?page=category_product" title="">Nokia</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="?page=category_product" title>Máy tính bảng</a>
-            </li>
-            <li>
-                <a href="?page=category_product" title>Laptop</a>
-            </li>
-            <li>
-                <a href="?page=category_product" title>Đồ dùng sinh hoạt</a>
-            </li>
-            <li>
-                <a href="?page=blog" title>Blog</a>
-            </li>
-            <li>
-                <a href="#" title>Liên hệ</a>
-            </li>
+        <?php
+            $list_danhmuc = get_table("danhmuc");
+            foreach ($list_danhmuc as $item) {
+            ?>
+                <li>
+                    <a href="?mod=products&id=<?php echo $item['MaDM'] ?>" title=""><?php echo $item['TenDM'] ?></a>
+                </li>
+            <?php
+            }
+            ?>
         </ul>
     </div>
 </div>

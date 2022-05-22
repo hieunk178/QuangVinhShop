@@ -29,7 +29,7 @@
                      <input type="text" name="" value="<?php echo isset($user['DiaChi'])?$user['DiaChi']:"" ?>">
                  </div>
                  <div class="input-form">
-                     <p><a href="?mod=account&act=login">Đổi mật khẩu</a></p>
+                     <p><a href="?mod=account&act=changePassword">Đổi mật khẩu</a></p>
                  </div>
              </form>
          </div>

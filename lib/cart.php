@@ -47,4 +47,16 @@
         $result = mysqli_query($conn, $sql);
         return mysqli_num_rows($result);
     }
+    function getMaDH(){
+        global $conn;
+        $sql = "SELECT MaDH FROM donhang WHERE id_user = {$_SESSION['id_user']}";
+        $result = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result)>0){
+            while($row = mysqli_fetch_assoc($result)){
+                $mahd = $row['MaDH'];
+            }
+        }
+        return $mahd;
+    }
+    
 ?>

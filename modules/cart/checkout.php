@@ -18,12 +18,13 @@ $user = get_item("taikhoan", "Id_User", "{$_SESSION['id_user']}");
         </div>
     </div>
     <div id="wrapper" class="wp-inner clearfix">
+    <form method="POST" action="?mod=cart&act=order" name="form-checkout">
         <div class="section" id="customer-info-wp">
             <div class="section-head">
                 <h1 class="section-title">Thông tin khách hàng</h1>
             </div>
             <div class="section-detail">
-                <form method="POST" action="" name="form-checkout">
+                
                     <div class="form-row clearfix">
                         <div class="form-col fl-left">
                             <label for="fullname">Họ tên</label>
@@ -50,7 +51,6 @@ $user = get_item("taikhoan", "Id_User", "{$_SESSION['id_user']}");
                             <textarea name="note"></textarea>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
         <div class="section" id="order-review-wp">
@@ -100,6 +100,7 @@ $user = get_item("taikhoan", "Id_User", "{$_SESSION['id_user']}");
                 </div>
             </div>
         </div>
+    </form>
     </div>
 </div>
 <?php

@@ -3,7 +3,7 @@ require "inc/header.php";
 if(empty($_SESSION['id_user'])){
     redirect("?mod=account&act=login");
 }else{
-    $Cat = getCart($_SESSION['id_user']);
+    $cart = getCart($_SESSION['id_user']);
 }
 ?>
 
@@ -43,7 +43,7 @@ if(empty($_SESSION['id_user'])){
                     <tbody>
                         <?php
                         $total = 0;
-                        foreach($Cat as $item){
+                        foreach($cart as $item){
                         isset($item['GiaKhuyenMai'])? $price = $item['GiaKhuyenMai'] : $price = $item['GiaGoc'];
                         $subtotal = $price * $item['SoLuong'];
                         $total += $subtotal;
@@ -92,6 +92,7 @@ if(empty($_SESSION['id_user'])){
         </div>
         <div class="section" id="action-cart-wp">
             <div class="section-detail">
+                <a href="?mod=order_detail" title="" id="buy-more">Đơn hàng của tôi</a><br/>
                 <a href="?mod=home" title="" id="buy-more">Mua tiếp</a><br/>
                 <a href="?mod=cart&act=delete&id_user=<?php echo $_SESSION['id_user'] ?>" title="" id="delete-cart">Xóa giỏ hàng</a>
             </div>
@@ -104,4 +105,7 @@ if(empty($_SESSION['id_user'])){
 </div>
 <?php
 require "inc/footer.php";
+if(isset($_GET['success'])){
+    echo "<script>alert('Đặt hàng thành công!')</script>";
+}
 ?>

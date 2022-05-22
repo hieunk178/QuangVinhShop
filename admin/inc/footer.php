@@ -1,6 +1,6 @@
 <div id="footer-wp">
     <div class="wp-inner">
-        <p id="copyright">2018 © Admin Theme by Php Master</p>
+        <p id="copyright">2022 © Admin by QuangVinhShop</p>
     </div>
 </div>
 </div>
