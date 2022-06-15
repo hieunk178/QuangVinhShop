@@ -26,3 +26,26 @@ $(document).ready(function () {
         }
     });
 });
+
+// $(".list-product-page .delete").onclick(function(){
+//     if(confirm('Xác nhận xóa sản phẩm?')){
+//         var masp = $(".list-product-page .masp").val();
+//         $.ajax({
+//             url: "/admin?page=delete_pro",
+//             method: 'POST',
+//             data: {
+//                 masp : masp
+//             },
+//             dataType: "text",
+//             success: function(result) {
+//                 $("#info-cart-wp .subtotal"+id).text(result.subtotal);
+//                 $("#info-cart-wp #total-price span").text(result.total_format);
+//                 $(".table #total-price").attr('data-total',result.total);
+//             },
+//             error:function(xhr, ajaxOptions, throwError){
+//                 //alert(xhr.status);
+//                 alert(throwError);
+//             }
+//         });
+//     }
+// });

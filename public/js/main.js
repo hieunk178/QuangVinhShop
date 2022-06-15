@@ -163,7 +163,7 @@ $(document).ready(function () {
     $(".select-product.right i").click(function() {
 
         $.ajax({
-            url: "?mod=compare&act=result",
+            url: "?mod=compare&act=result1",
             method: 'POST',
             data: {},
             dataType: "text",
@@ -267,3 +267,6 @@ function tab() {
     $('#tab-menu li:first-child').addClass('show');
     $('.tabItem:first-child').show();
 }
+
+//ajax
+//Xóa sản phẩm

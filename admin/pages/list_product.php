@@ -69,7 +69,7 @@ if (mysqli_num_rows($result) > 0) {
                                 <tr>
                                     <td><input type="checkbox" name="checkItem" class="checkItem"></td>
                                     <td><span class="tbody-text"><?php echo $count ?></h3></span>
-                                    <td><span class="tbody-text"><?php echo $sp['MaSP'] ?></h3></span>
+                                    <td><span class="tbody-text masp"><?php echo $sp['MaSP'] ?></h3></span>
                                     <td>
                                         <div class="tbody-thumb">
                                             <img src="../<?php echo $sp['Anh'] ?>" alt="">
@@ -81,10 +81,10 @@ if (mysqli_num_rows($result) > 0) {
                                         </div>
                                         <ul class="list-operation fl-right">
                                             <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                            <li><a class="delete" href="?page=delete_pro&id=<?php echo $sp['MaSP'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </td>
-                                    <td><span class="tbody-text"><?php echo $sp['GiaKhuyenMai']>0 ? $sp['GiaKhuyenMai'] : $sp['GiaGoc'];?></span></td>
+                                    <td style="text-align:center;"><span  class="tbody-text"><?php echo currency_format($sp['GiaKhuyenMai']>0 ? $sp['GiaKhuyenMai'] : $sp['GiaGoc']);?></span></td>
                                     <td><span class="tbody-text"><?php echo $sp['TenDM'] ?></span></td>
                                     <td><span class="tbody-text"><?php echo $sp['SoLuong']>0 ? "Còn hàng" : "Hết hàng" ?></span></td>
                                     <td><span class="tbody-text">Admin</span></td>

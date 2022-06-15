@@ -4,6 +4,5 @@
     unset ($_SESSION['is_user']);
     unset ($_SESSION['id_user']);
     unset ($_SESSION['permission']);
-    //unset ($_COOKIE[''])
     redirect();
 ?>

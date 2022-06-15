@@ -97,7 +97,7 @@ function filter(){
 function get_search(){
     global $conn;
     $search = $_GET['search'];
-    $sql = "SELECT * FROM sanpham where TenSP like '%{$search}%'";
+    $sql = "SELECT * FROM sanpham where TenSP like '{$search}'";
     $result = mysqli_query($conn, $sql);
     $list_sp = array();
     if (mysqli_num_rows($result) > 0) {
@@ -126,4 +126,12 @@ function get_address($ward, $district, $province){
     $result = mysqli_query($conn, $sql);
     $ad = mysqli_fetch_assoc($result);
     return $ad['ward'].", ".$ad['district'].", ".$ad['province'];
+}
+function get_permition(){
+    global $conn;
+    $sql = "SELECT quyen from taikhoan where id_user = {$_SESSION['id_user']}";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) == 1){
+        return mysqli_fetch_assoc($result)['quyen'];
+    }
 }

@@ -1,9 +1,10 @@
 <?php
-$sql = "SELECT masp, anh, giagoc, giakhuyenmai, motangan, motachitiet from sanpham where masp = {$_POST['id_pro']}";
+$sql = "SELECT masp, anh, giagoc, giakhuyenmai, motangan, motachitiet, madm from sanpham where masp = {$_POST['id_pro']}";
 $result = mysqli_query($conn, $sql);
 if(mysqli_num_rows($result) == 1){
     $item = mysqli_fetch_assoc($result);
 }
+$_SESSION['select'] = $item['madm'];
 $giagoc = currency_format($item['giagoc']);
 $giakm = currency_format($item['giakhuyenmai']);
 $list_mota = explode('.', $item['motangan']);

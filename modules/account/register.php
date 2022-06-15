@@ -17,6 +17,7 @@ if (isset($_POST['btn-register'])) {
     $gender = $_POST['gender'];
     $ward = $_POST['ward'];
     $ckpassword = $_POST['password'];
+    
     $error = array();
     $address = $_POST['address'].", ".get_address($ward, $district, $province);
 
@@ -64,7 +65,7 @@ if (isset($_POST['btn-register'])) {
         $fullnameErr = "Fullname is required";
      }
 
-     if (empty($_POST["gender"])) {
+     if (empty($_POST['gender'])) {
          $genderErr = "Gender is required";
      }
 
@@ -168,7 +169,7 @@ if (isset($_POST['btn-register'])) {
                     </div>
                     <div>
                         <span>Giới tính</span><span class="obligatory">*</span><br><br>
-                        <input type="radio" name="gender" value="Nam">Nam &emsp;
+                        <input type="radio" name="gender" checked value="Nam">Nam &emsp;
                         <input type="radio" name="gender" value="Nữ">Nữ &emsp;
                         <input type="radio" name="gender" value="Khác">Khác
                         <span class="error"> <?php echo $genderErr;?></span><br><br>

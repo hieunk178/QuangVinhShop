@@ -1,3 +1,12 @@
+<?php
+if(empty($_SESSION['is_login'])){
+    redirect("?mod=account&act=login");
+}else{
+    if(get_permition() != 0){
+        redirect("../");
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>

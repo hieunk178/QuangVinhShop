@@ -33,7 +33,11 @@ $errorOld = $errorNew = $passwordErr = "";
 			$result = mysqli_query($conn, $sql);
 			echo "Successfully";
             echo "<script>alert('Đổi mật khẩu thành công!')</script>";
-			redirect();
+            if(isset($_COOKIE["m_username"]))
+            {
+                setcookie ("m_password", "");
+            }
+			redirect("?mod=account&act=login");
 		}
 	}
 

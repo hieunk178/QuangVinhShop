@@ -25,5 +25,5 @@ foreach($cart as $item){
     $success = true;
 }
 if($success){
-    redirect("?mod=cacrt&success");
+    redirect("?mod=cart&success");
 }

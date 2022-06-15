@@ -1,7 +1,7 @@
 <?php
 session_start();
-require "../db/connect.php";
-require "../lib/url.php";
+require "db/connect.php";
+require "lib/url.php";
 require "../lib/getDatabase.php";
 require "../lib/money.php";
 if (!isset($_SESSION['is_login'])){

@@ -11,7 +11,7 @@ $act = isset($_GET['act']) ? $_GET['act'] : 'main';
 
 $path = "modules/{$mod}/{$act}.php";
 if(file_exists($path)){
-    require $path;
+    include $path;
 }
 else require "inc/404.php"
 ?>
