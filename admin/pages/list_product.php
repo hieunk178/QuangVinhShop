@@ -8,6 +8,9 @@ if (mysqli_num_rows($result) > 0) {
         $list_sanpham[] = $row;
     }
 }
+$num_img = count($list_sanpham);
+$numOnPage = 10;
+$numPage = ($num_img/$numOnPage)+1;
 ?>
 <div id="main-content-wp" class="list-product-page">
     <div class="wrap clearfix">
@@ -62,31 +65,31 @@ if (mysqli_num_rows($result) > 0) {
                             </thead>
                             <tbody>
                                 <?php
-                                $count = 0;
-                                foreach($list_sanpham as $sp){
-                                    $count++;
+                                $start = isset($_GET['num'])? ($_GET['num']-1)*$numOnPage : 0;
+                                $end = isset($_GET['num'])? ($_GET['num']*$numOnPage)-1 : 9;
+                                    for($i = $start; $i<= $end; $i++){
                                 ?>
                                 <tr>
                                     <td><input type="checkbox" name="checkItem" class="checkItem"></td>
-                                    <td><span class="tbody-text"><?php echo $count ?></h3></span>
-                                    <td><span class="tbody-text masp"><?php echo $sp['MaSP'] ?></h3></span>
+                                    <td><span class="tbody-text"><?php echo $i+1 ?></h3></span>
+                                    <td><span class="tbody-text masp"><?php echo $list_sanpham[$i]['MaSP'] ?></h3></span>
                                     <td>
                                         <div class="tbody-thumb">
-                                            <img src="../<?php echo $sp['Anh'] ?>" alt="">
+                                            <img src="../<?php echo $list_sanpham[$i]['Anh'] ?>" alt="">
                                         </div>
                                     </td>
                                     <td class="clearfix">
                                         <div class="tb-title fl-left">
-                                            <a href="" title=""><?php echo $sp['TenSP'] ?></a>
+                                            <a href="" title=""><?php echo $list_sanpham[$i]['TenSP'] ?></a>
                                         </div>
                                         <ul class="list-operation fl-right">
                                             <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                            <li><a class="delete" href="?page=delete_pro&id=<?php echo $sp['MaSP'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                            <li><a class="delete" href="?page=delete_pro&id=<?php echo $list_sanpham[$i]['MaSP'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </td>
-                                    <td style="text-align:center;"><span  class="tbody-text"><?php echo currency_format($sp['GiaKhuyenMai']>0 ? $sp['GiaKhuyenMai'] : $sp['GiaGoc']);?></span></td>
-                                    <td><span class="tbody-text"><?php echo $sp['TenDM'] ?></span></td>
-                                    <td><span class="tbody-text"><?php echo $sp['SoLuong']>0 ? "Còn hàng" : "Hết hàng" ?></span></td>
+                                    <td style="text-align:center;"><span  class="tbody-text"><?php echo currency_format($list_sanpham[$i]['GiaKhuyenMai']>0 ? $list_sanpham[$i]['GiaKhuyenMai'] : $sp['GiaGoc']);?></span></td>
+                                    <td><span class="tbody-text"><?php echo $list_sanpham[$i]['TenDM'] ?></span></td>
+                                    <td><span class="tbody-text"><?php echo $list_sanpham[$i]['SoLuong']>0 ? "Còn hàng" : "Hết hàng" ?></span></td>
                                     <td><span class="tbody-text">Admin</span></td>
                                     <td><span class="tbody-text">--/--/----</span></td>
                                 </tr>
@@ -101,23 +104,26 @@ if (mysqli_num_rows($result) > 0) {
             <div class="section" id="paging-wp">
                 <div class="section-detail clearfix">
                     <p id="desc" class="fl-left">Chọn vào checkbox để lựa chọn tất cả</p>
+                    <?php if($numPage > 1){ ?>
                     <ul id="list-paging" class="fl-right">
                         <li>
-                            <a href="" title=""><</a>
+                            <a href='?page=list_media&num=<?php echo isset($_GET['num'])? $_GET['num']-1 :1; ?>' title=''><</a>
                         </li>
+                        <?php
+                        for($index = 1; $index <= $numPage; $index++){
+                            echo
+                            "<li>
+                                <a href='?page=list_media&num=$index' title=''>$index</a>
+                            </li>";
+                        }
+                        ?>
                         <li>
-                            <a href="" title="">1</a>
-                        </li>
-                        <li>
-                            <a href="" title="">2</a>
-                        </li>
-                        <li>
-                            <a href="" title="">3</a>
-                        </li>
-                        <li>
-                            <a href="" title="">></a>
+                            <a href='?page=list_media&num=<?php echo isset($_GET['num'])? $_GET['num']+1 :$numPage; ?>' title=''>></a>
                         </li>
                     </ul>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>

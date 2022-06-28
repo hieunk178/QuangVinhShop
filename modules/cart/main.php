@@ -64,7 +64,7 @@ if(empty($_SESSION['id_user'])){
                             </td>
                             <td class="subtotal<?php echo $item['MaSP']  ?>"><?php echo currency_format($subtotal); ?></td>
                             <td>
-                                <a href="?mod=cart&act=delete&id=<?php echo $item['MaSP']?>" title="" class="del-product"><i class="fa fa-trash-o"></i></a>
+                                <a href="?mod=cart&act=delete&id=<?php echo $item['MaSP']?>&" title="" class="del-product"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
                         <?php } ?>
@@ -92,7 +92,7 @@ if(empty($_SESSION['id_user'])){
         </div>
         <div class="section" id="action-cart-wp">
             <div class="section-detail">
-                <a href="?mod=order_detail" title="" id="buy-more">Đơn hàng của tôi</a><br/>
+                <a href="?mod=order&act=order_list" title="" id="buy-more">Đơn hàng của tôi</a><br/>
                 <a href="?mod=home" title="" id="buy-more">Mua tiếp</a><br/>
                 <a href="?mod=cart&act=delete&id_user=<?php echo $_SESSION['id_user'] ?>" title="" id="delete-cart">Xóa giỏ hàng</a>
             </div>

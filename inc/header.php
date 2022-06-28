@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(isset($_POST['btn-search'])){
     redirect("?mod=products&act=search&search={$_POST['s']}");
 }
@@ -40,7 +41,6 @@ if(isset($_POST['btn-search'])){
                                 <i class="fa fa-envelope"></i>
                                 </div>
                                 <?php
-                                session_start();
                                 if (isset($_SESSION['is_login'])) {
                                     echo "
                                     <div class='top-content'>
@@ -50,6 +50,7 @@ if(isset($_POST['btn-search'])){
                                     if(isset($_SESSION['permission']) & $_SESSION['permission'] ==0)
                                         echo "<li> <a href='./admin'>Quản lý cửa hàng</a></li>";
                                     
+                                    echo "<li><a href='?mod=order&act=order_list'>Đơn mua</a></li>";
                                     echo "<li><a href='?mod=account&act=logout'>Đăng xuất</a></li>
                                     </ul>
                                     </div>";

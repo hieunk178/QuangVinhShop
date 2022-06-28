@@ -1,3 +1,28 @@
+<?php
+function getImagesFromDir($path) {
+    $images = array();
+    if ( $img_dir = @opendir($path) ) {
+    while ( false !== ($img_file = readdir($img_dir)) ) {
+    // checks for gif, jpg, png
+    if ( preg_match("/(\.gif|\.jpg|\.png)$/", $img_file) ) {
+    $images[] = [$path."/".$img_file, $img_file];
+    }
+    }
+    closedir($img_dir);
+    }
+    return $images;
+    }
+    $path = "../uploads/images";
+    $imgList = getImagesFromDir($path);
+    $path = "../uploads/files";
+    $imgList += getImagesFromDir($path);
+    $path = "../uploads";
+    $imgList += getImagesFromDir($path);
+
+    $num_img = count($imgList);
+    $numOnPage = 10;
+    $numPage = ($num_img/ $numOnPage);
+?>
 <div id="main-content-wp" class="list-product-page list-slider">
     <div class="wrap clearfix">
         <?php require 'inc/sidebar.php'; ?>
@@ -36,21 +61,25 @@
                                     <td><span class="thead-text">Hình ảnh</span></td>
                                     <td><span class="thead-text">Tên file</span></td>
                                     <td><span class="thead-text">Người tạo</span></td>
-                                    <td><span class="thead-text">Thời gian</span></td>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                $start = isset($_GET['num'])? ($_GET['num']-1)*$numOnPage : 0;
+                                $end = isset($_GET['num'])? ($_GET['num']*$numOnPage)-1 : 9;
+                                    for($i = $start; $i<= $end; $i++){
+                                ?>
                                 <tr>
                                     <td><input type="checkbox" name="checkItem" class="checkItem"></td>
-                                    <td><span class="tbody-text">1</h3></span>
+                                    <td><span class="tbody-text"><?php echo $i+1?></h3></span>
                                     <td>
                                         <div class="tbody-thumb">
-                                            <img src="public/images/img-product.png" alt="">
+                                            <img src="<?php echo $imgList[$i][0]?>" alt="">
                                         </div>
                                     </td>
                                     <td class="clearfix">
                                         <div class="tb-title fl-left">
-                                            <a href="" title="">IMG_1402.jpg</a>
+                                            <a href="<?php echo $imgList[$i][0]?>" title=""><?php  echo $imgList[$i][1]?></a>
                                         </div>
                                         <ul class="list-operation fl-right">
                                             <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
@@ -58,79 +87,11 @@
                                         </ul>
                                     </td>
                                     <td><span class="tbody-text">Admin</span></td>
-                                    <td><span class="tbody-text">12-07-2016</span></td>
                                 </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="checkItem" class="checkItem"></td>
-                                    <td><span class="tbody-text">2</h3></span>
-                                    <td>
-                                        <div class="tbody-thumb">
-                                            <img src="public/images/img-product.png" alt="">
-                                        </div>
-                                    </td>
-                                    <td class="clearfix">
-                                        <div class="tb-title fl-left">
-                                            <a href="" title="">IMG_1402.jpg</a>
-                                        </div>
-                                        <ul class="list-operation fl-right">
-                                            <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </td>
-                                    <td><span class="tbody-text">Admin</span></td>
-                                    <td><span class="tbody-text">12-07-2016</span></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="checkItem" class="checkItem"></td>
-                                    <td><span class="tbody-text">3</h3></span>
-                                    <td>
-                                        <div class="tbody-thumb">
-                                            <img src="public/images/img-product.png" alt="">
-                                        </div>
-                                    </td>
-                                    <td class="clearfix">
-                                        <div class="tb-title fl-left">
-                                            <a href="" title="">IMG_1402.jpg</a>
-                                        </div>
-                                        <ul class="list-operation fl-right">
-                                            <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </td>
-                                    <td><span class="tbody-text">Admin</span></td>
-                                    <td><span class="tbody-text">12-07-2016</span></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="checkItem" class="checkItem"></td>
-                                    <td><span class="tbody-text">4</h3></span>
-                                    <td>
-                                        <div class="tbody-thumb">
-                                            <img src="public/images/img-product.png" alt="">
-                                        </div>
-                                    </td>
-                                    <td class="clearfix">
-                                        <div class="tb-title fl-left">
-                                            <a href="" title="">IMG_1402.jpg</a>
-                                        </div>
-                                        <ul class="list-operation fl-right">
-                                            <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </td>
-                                    <td><span class="tbody-text">Admin</span></td>
-                                    <td><span class="tbody-text">12-07-2016</span></td>
-                                </tr>
+                                <?php
+                                }
+                                ?>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td><input type="checkbox" name="checkAll" id="checkAll"></td>
-                                    <td><span class="tfoot-text">STT</span></td>
-                                    <td><span class="tfoot-text">Hình ảnh</span></td>
-                                    <td><span class="tfoot-text">Tên file</span></td>
-                                    <td><span class="tfoot-text">Người tạo</span></td>
-                                    <td><span class="tfoot-text">Thời gian</span></td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -138,23 +99,26 @@
             <div class="section" id="paging-wp">
                 <div class="section-detail clearfix">
                     <p id="desc" class="fl-left">Chọn vào checkbox để lựa chọn tất cả</p>
+                    <?php if($numPage > 1){ ?>
                     <ul id="list-paging" class="fl-right">
                         <li>
-                            <a href="" title=""><</a>
+                            <a href='?page=list_media&num=<?php echo isset($_GET['num'])? $_GET['num']-1 :1; ?>' title=''><</a>
                         </li>
+                        <?php
+                        for($index = 1; $index <= $numPage; $index++){
+                            echo
+                            "<li>
+                                <a href='?page=list_media&num=$index' title=''>$index</a>
+                            </li>";
+                        }
+                        ?>
                         <li>
-                            <a href="" title="">1</a>
-                        </li>
-                        <li>
-                            <a href="" title="">2</a>
-                        </li>
-                        <li>
-                            <a href="" title="">3</a>
-                        </li>
-                        <li>
-                            <a href="" title="">></a>
+                            <a href='?page=list_media&num=<?php echo isset($_GET['num'])? $_GET['num']+1 :$numPage; ?>' title=''>></a>
                         </li>
                     </ul>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>

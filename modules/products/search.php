@@ -26,9 +26,8 @@ $list_sp = get_search();
                 <div class="section-head ">
                     <h3>Tìm Kiếm</h3>
                     <div class="filter-wp fl-right">
-                        <p class="desc">Hiển thị 45 trên 50 sản phẩm</p>
                         <div class="form-filter">
-                            <form method="POST" action="?mod=product&act=filter">
+                            <form method="POST" action="?mod=products&act=filter">
                                 <select name="select">
                                     <option value="0">Sắp xếp</option>
                                     <option value="1">Từ A-Z</option>

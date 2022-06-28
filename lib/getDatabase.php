@@ -62,7 +62,28 @@ function get_item($item,$attr, $value)
     }
     return $info;
 }
-
+function get_order_by_userId($id){
+    global $conn;
+    $sql = "SELECT * FROM donhang WHERE id_user = $id";
+    $result = mysqli_query($conn, $sql);
+    $list = array();
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result))
+        $list[] = $row;
+    }
+    return $list;
+}
+function get_detail_order_by_MaDH($maDH){
+    global $conn;
+    $sql = "SELECT * FROM chitietdonhang, sanpham, anh,  WHERE chitietdonhang.masp = sanpham.masp AND madh = $maDH";
+    $result = mysqli_query($conn, $sql);
+    $list = array();
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result))
+        $list[] = $row;
+    }
+    return $list;
+}
 function filter(){
         $sql="";
         if($_POST['select'] != 0){
@@ -97,7 +118,7 @@ function filter(){
 function get_search(){
     global $conn;
     $search = $_GET['search'];
-    $sql = "SELECT * FROM sanpham where TenSP like '{$search}'";
+    $sql = "SELECT * FROM sanpham where TenSP like '%{$search}%'";
     $result = mysqli_query($conn, $sql);
     $list_sp = array();
     if (mysqli_num_rows($result) > 0) {

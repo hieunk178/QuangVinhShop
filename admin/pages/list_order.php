@@ -70,7 +70,7 @@ $list_order = get_list_order();
                                     <td><span class="tbody-text"><?php echo currency_format( $order['tongtien'])  ?></span></td>
                                     <td><span class="tbody-text"><?php echo $order['tinhtrang']  ?></span></td>
                                     <td><span class="tbody-text"><?php echo $order['ngaylap']  ?></span></td>
-                                    <td><a href="?page=detail_order" title="" class="tbody-text">Chi tiết</a></td>
+                                    <td><a href="?page=detail_order&id=<?php echo $order['madh']?>" title="" class="tbody-text">Chi tiết</a></td>
                                 </tr>
                                 <?php } ?>
                             </tbody>

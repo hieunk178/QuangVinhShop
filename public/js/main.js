@@ -252,6 +252,34 @@ $(document).ready(function () {
             }
         });
     });
+
+    $("#detail-product-wp #num-order-wp").on("click", ".change-num", function(){
+        var num_order = $("#detail-product-wp #num-order-wp #num-order").val();
+        var id = $("#detail-product-wp #num-order-wp #num-order").attr("data-id");
+        $.ajax({
+            url: "?mod=products&act=num_change",
+            method: 'POST',
+            data: {
+                num_order: num_order,
+                id: id,
+            },
+            dataType: "Text",
+            success: function(result) {
+                $(".btn-change").html(result);
+            },
+            error:function(xhr, ajaxOptions, throwError){
+                //alert(xhr.status);
+                alert(throwError);
+            }
+        });
+    });
+
+    //Trạng thái sản phẩm
+    if($(".num-product .status").text() == "Còn hàng"){
+        $(".num-product .status").css({'background':'#0d4'});
+    }else{
+        $(".num-product .status").css({'background':'#f22'});
+    }
 });
 
 function tab() {

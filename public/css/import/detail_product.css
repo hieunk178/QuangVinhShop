@@ -46,7 +46,6 @@
 #detail-product-wp .info .num-product .title{ color: #666}
 #detail-product-wp .info .num-product .status{
     display: inline-block;
-    background: #ddd;
     padding: 0px 10px;
 }
 #detail-product-wp .info .price{
@@ -95,7 +94,8 @@
     text-transform: uppercase;
 }
 #detail-product-wp .add-cart:hover{ background: #006d00;}
-#post-product-wp .section-title, #same-category-wp .section-title{
+#post-product-wp .section-title, #same-category-wp .section-title,
+#comment .section-title{
     font-size: 21px;
     margin: 35px 0px 20px 0px;
     text-transform: uppercase;
@@ -117,4 +117,29 @@
 .detail_description img{
     width: 100%;
     margin: 0 auto;
+}
+/* #detail-product-wp input[type=number]::-webkit-inner-spin-button, 
+#detail-product-wp input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+} */
+#comment .comment_text{
+    font-size: 20px;
+    padding: 20px;
+    border:1px solid rgb(33, 255, 13);
+    border-radius: 5px;
+}
+#comment .submit{
+    padding: 10px 20px;
+    background: #1ea600;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    width: 180px;
+    transform: translate(10px);
+    border-radius: 10px;
+    cursor: pointer;
 }

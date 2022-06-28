@@ -10,7 +10,7 @@ if(empty($_SESSION['is_login'])){
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Quản lý ISMART</title>
+        <title>Admin Quang Vinh Shop</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="public/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -95,7 +95,7 @@ if(empty($_SESSION['is_login'])){
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a href="?page=info_account" title="Thông tin cá nhân">Thông tin tài khoản</a></li>
-                                <li><a href="#" title="Thoát">Thoát</a></li>
+                                <li><a href="../?mod=home" title="Thoát">Thoát</a></li>
                             </ul>
                         </div>
                     </div>
