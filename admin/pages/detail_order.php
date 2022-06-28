@@ -1,4 +1,7 @@
 <?php 
+if(isset($_POST['sm_status'])){
+    mysqli_query($conn, "UPDATE `donhang` SET TinhTrang = '{$_POST['status']}' WHERE MaDH = {$_GET['id']}");
+}
 $order = get_item("donhang", "madh", $_GET['id']);
 $detail_order = get_detail_order_by_MaDH($_GET['id']);
 ?>
@@ -27,10 +30,11 @@ $detail_order = get_detail_order_by_MaDH($_GET['id']);
                         <li>
                             <h3 class="title">Tình trạng đơn hàng</h3>
                             <select name="status">
-                                <option <?php echo $order['TinhTrang'] == "Chờ xác nhận"?"selected":"" ?>  value='0'>Chờ xác nhận</option>
-                                <option <?php echo $order['TinhTrang'] == "Chờ lấy hàng"?"selected":"" ?> value='1'>Chờ lấy hàng</option>
-                                <option <?php echo $order['TinhTrang'] == "Đang giao"?"selected":"" ?> value='1'>Đang giao</option>
-                                <option <?php echo $order['TinhTrang'] == "Thành công"?"selected":"" ?>  value='2'>Thành công</option>                            
+                                <option <?php echo $order['TinhTrang'] == "Chờ xác nhận"?"selected":"" ?>  value='Chờ xác nhận'>Chờ xác nhận</option>
+                                <option <?php echo $order['TinhTrang'] == "Chờ lấy hàng"?"selected":"" ?> value='Chờ lấy hàng'>Chờ lấy hàng</option>
+                                <option <?php echo $order['TinhTrang'] == "Đang giao"?"selected":"" ?> value='Đang giao'>Đang giao</option>
+                                <option <?php echo $order['TinhTrang'] == "Thành công"?"selected":"" ?>  value='Thành công'>Thành công</option>                            
+                                <option <?php echo $order['TinhTrang'] == "Đã hủy"?"selected":"" ?>  value='Đã hủy'>Đã hủy</option>                            
                             </select>
                             <input type="submit" name="sm_status" value="Cập nhật đơn hàng">
                         </li>
@@ -55,19 +59,21 @@ $detail_order = get_detail_order_by_MaDH($_GET['id']);
                         </thead>
                         <tbody>
                             <?php
+                            $total = 0;
                             foreach($detail_order as $i => $sp){
+                                $total += $sp['DonGia'] * $sp['SoLuong'];
                             ?>
                             <tr>
                                 <td class="thead-text"><?php echo $i+1 ?></td>
                                 <td class="thead-text">
                                     <div class="thumb">
-                                        <img src="public/images/img-product.png" alt="">
+                                        <img src="<?php echo "../".$sp['Anh'] ?>" alt="">
                                     </div>
                                 </td>
-                                <td class="thead-text">Chân váy nữ</td>
-                                <td class="thead-text">145,000 VNĐ</td>
-                                <td class="thead-text">5</td>
-                                <td class="thead-text">725,000 VNĐ</td>
+                                <td class="thead-text"><?php echo $sp['TenSP'] ?></td>
+                                <td class="thead-text"><?php echo currency_format($sp['DonGia']) ?></td>
+                                <td class="thead-text"><?php echo ($sp['SoLuong']) ?></td>
+                                <td class="thead-text"><?php echo currency_format($sp['DonGia'] * $sp['SoLuong']) ?></td>
                             </tr>
                             <?php
                             }
@@ -85,8 +91,8 @@ $detail_order = get_detail_order_by_MaDH($_GET['id']);
                             <span class="total">Tổng đơn hàng</span>
                         </li>
                         <li>
-                            <span class="total-fee">5 sản phẩm</span>
-                            <span class="total">725,000 VNĐ</span>
+                            <span class="total-fee"><?php echo count($detail_order) ?> sản phẩm</span>
+                            <span class="total"><?php echo currency_format($total); ?></span>
                         </li>
                     </ul>
                 </div>

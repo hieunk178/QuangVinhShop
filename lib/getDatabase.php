@@ -75,7 +75,7 @@ function get_order_by_userId($id){
 }
 function get_detail_order_by_MaDH($maDH){
     global $conn;
-    $sql = "SELECT * FROM chitietdonhang, sanpham, anh,  WHERE chitietdonhang.masp = sanpham.masp AND madh = $maDH";
+    $sql = "SELECT chitietdonhang.MaDH, chitietdonhang.MaSP, chitietdonhang.SoLuong, chitietdonhang.DonGia, sanpham.TenSP, sanpham.Anh FROM chitietdonhang, sanpham  WHERE chitietdonhang.masp = sanpham.masp AND madh = $maDH";
     $result = mysqli_query($conn, $sql);
     $list = array();
     if (mysqli_num_rows($result) > 0) {
