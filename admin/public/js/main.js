@@ -25,6 +25,21 @@ $(document).ready(function () {
             return false;
         }
     });
+
+
+    //Load img 
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                   $(".add-cat-page .img_add").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);            
+            }
+        }
+    $(".add-cat-page .input_img").change(function(){
+        readURL(this);
+    });
 });
 
 // $(".list-product-page .delete").onclick(function(){

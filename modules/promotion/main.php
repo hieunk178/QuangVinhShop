@@ -14,6 +14,14 @@ require "inc/header.php";
                     </li>
                 </ul>
             </div>
+            <div class="section-detail promotion">
+                <?php
+                $list_cat = get_table("danhmuc");
+                foreach($list_cat as $item){
+                    echo "<a href=''>{$item['TenDM']}</a>";
+                }
+                ?>
+            </div>
         </div>
     </div>
 </div>

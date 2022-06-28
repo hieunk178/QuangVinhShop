@@ -103,9 +103,9 @@ if (isset($_POST['btn-submit'])) {
                         <textarea name="detail_desc" id="detail_desc" class="ckeditor"value="<?php if(isset($ChiTiet))echo $ChiTiet; ?>"></textarea>
                         <label>Hình ảnh</label>
                         <div id="uploadFile">
-                            <input type="file" name="file" id="file">
+                            <input class='input_img' type="file" name="file" id="file">
                             <p class="success" style="color:lawngreen"><?php if (isset($success)) echo $success ?></p>
-                            <img src="<?php echo isset($targetFilePath) ? $targetFilePath : 'uploads/img-pro-05.png'; ?>">
+                            <img class='img_add' src="public/images/img-thumb.png" alt="">
                         </div>
                         <label>Danh mục sản phẩm</label>
                         <select name="parent_id">

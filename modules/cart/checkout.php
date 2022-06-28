@@ -68,6 +68,8 @@ $user = get_item("taikhoan", "Id_User", "{$_SESSION['id_user']}");
                     <tbody>
                         <?php 
                         $cart = getCart($_SESSION['id_user']);
+                        $_SESSION['anh'] = $cart[0]['Anh'];
+                        $_SESSION['sosp'] = count($cart);
                         foreach($cart as $item){
                         ?>
                         <tr class="cart-item">
@@ -86,11 +88,11 @@ $user = get_item("taikhoan", "Id_User", "{$_SESSION['id_user']}");
                 <div id="payment-checkout-wp">
                     <ul id="payment_methods">
                         <li>
-                            <input type="radio" id="direct-payment" name="payment-method" value="direct-payment">
+                            <input type="radio" id="direct-payment" name="payment-method" checked value="Thanh toán tại cửa hàng">
                             <label for="direct-payment">Thanh toán tại cửa hàng</label>
                         </li>
                         <li>
-                            <input type="radio" id="payment-home" name="payment-method" value="payment-home">
+                            <input type="radio" id="payment-home" name="payment-method" value="Thanh toán tại nhà">
                             <label for="payment-home">Thanh toán tại nhà</label>
                         </li>
                     </ul>

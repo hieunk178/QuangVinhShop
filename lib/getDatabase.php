@@ -64,7 +64,8 @@ function get_item($item,$attr, $value)
 }
 function get_order_by_userId($id){
     global $conn;
-    $sql = "SELECT * FROM donhang WHERE id_user = $id";
+    $sql = "SELECT * FROM donhang WHERE id_user = $id 
+    order by madh DESC";
     $result = mysqli_query($conn, $sql);
     $list = array();
     if (mysqli_num_rows($result) > 0) {
